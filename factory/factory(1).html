@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>简单工厂</title>
+</head>
+<body>
+<script>
+var BicycleShop = function() {
+
+}
+BicycleShop.prototype = {
+    sellBicycle: function(model) {
+        var bicycle = this.createBicycle(model);
+        // 组装
+        bicycle.assemble();
+        bicycle.wash();
+        bicycle.ride();
+        bicycle.repair();
+        return bicycle;
+    },
+    createBicycle: function() {
+        throw new Error('不要在抽象类里执行方法');
+    }
+}
+
+// var shop = new BicycleShop();
+// shop.sellBicycle();
+
+var GiantBicycleShop = function() {
+    BicycleShop.apply(this, arguments);
+}
+
+GiantBicycleShop.prototype = BicycleShop;
+GiantBicycleShop.prototype.createBicycle = function(model) {
+    var bicycle;
+    switch(model) {
+        case 'Giant hy': bicycle = new GiantHy();
+        break;
+        case 'Giant yl': bicycle = new GiantYl();
+        break; 
+    }
+}
+
+function GiantYl() {
+
+}
+GiantYl.prototype = {
+    assemble: function() {
+        console.log("组装车");
+    },
+    wash: function() {
+        console.log("清洗车");
+    },
+    ride: function() {
+        console.log("包骑三年");
+    },
+    repair: function() {
+        console.log("保修一年");
+    }
+}
+// 类  面向对象
+// 目标， 每辆车都有以上的方法
+// Interface.ensureImplements(bicycle, Bicycle); //接口，不是类，是一个对象的约束
+// var Bicycle = new Interface('Bicycle', ['assemle','wash','ride','repair']);
+</script>    
+</body>
+</html>

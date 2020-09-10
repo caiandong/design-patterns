@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>刻意练习-用JS讲故事</title>
+</head>
+<body>
+<script>
+  //  talk-js  js 的表现力
+  //  小明有关 追MM的故事
+  //  送花
+  //  类  Flower 类别，颜色
+  var Flower = function(){   // 对象首字母大写，函数是JS里面最大的对象,小写是对象，大写是类
+
+  }
+  var xiaoming = {
+    name : '小明',
+    age : 22,
+    //  送谁？花
+    sendFlower : function(target){
+      //  花要买？
+      var flower = new Flower();
+      //  花要送谁？
+      target.receiveFlower(flower, this);
+    }
+  }
+  var xiaomei = {
+    name : '小美',
+    age　: 21 ,
+    receiveFlower: function(flower, sender){
+      console.log(this.name + '收到了' + sender.name + '送的花');   // JS向控制台输出
+    }
+  }
+  // 小红  代理模式
+  var xiaohong = {
+    receiveFlower: function(flower, sender){
+      // 小明为啥找小红代理？
+      // 小美的心情如何？
+      // 小美是否有男朋友？
+      if(sender.name === '小明'){
+        console.log('明哥，我们在一起吧！');
+      }else{
+      xiaomei.receiveFlower(flower, sender);
+      }
+    }
+  }
+xiaoming.sendFlower(xiaohong);
+  //  xiaoming.sendFlower(xiaomei);
+</script>
+</body>
+</html>
